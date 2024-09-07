@@ -1,0 +1,20 @@
+---
+import Base from "../../layouts/Base.astro";
+import Project from "../../components/Project.astro";
+---
+
+<Base title="Home Page">
+  <div>
+    <h1 class="text-7xl m-3 text-center">Projects</h1>
+    <ul>
+      <Project
+        title="Chef's Kiss"
+        icon="fa-solid fa-utensils"
+        link="./chefskiss"
+        body="A generative meal plan assistant, with advanced features for creating flexible, budgeted meal plans with live price data."
+        github="https://github.com/SirMarshall/selectElectronicConsulting/tree/main/src/pages/projects/chefskiss">
+      </Project>
+      
+    </ul>
+  </div>
+</Base>

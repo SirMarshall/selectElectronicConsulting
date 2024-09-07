@@ -1,0 +1,25 @@
+---
+const { title, link, body, github, icon } = Astro.props;
+---
+
+<div class="mb-6 bg-white rounded-lg shadow-md p-6 border-l-4 border-neutral-950 
+            hover:shadow-lg 
+            hover:bg-neutral-50
+            transition duration-200 ease-in-out">
+  <h3 class="text-xl font-semibold mb-3 text-neutral-950 flex items-center"> 
+    {title}
+    <i class={`${icon} ml-2`} ></i> 
+  </h3>
+  <div class="flex"> 
+    <div class="w-1/2">
+      <a href={link}>
+        <h4>{body}</h4> 
+      </a>
+    </div>
+    <div class="w-1/2 flex items-center justify-center min-h-full"> 
+      <a href={github} class="flex items-center justify-center w-full h-full">
+        <i class="fa-solid fa-code text-4xl text-slate-800"></i> 
+      </a>
+    </div>
+  </div>
+</div>

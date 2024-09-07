@@ -1,0 +1,115 @@
+<div id="meal-plan-container" class="mt-8 max-w-4xl mx-auto">
+    <div
+        id="loading-spinner"
+        class="hidden flex justify-center items-center p-12"
+    >
+        <div
+            class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-amber-50"
+        >
+        </div>
+    </div>
+</div>
+
+<script>
+    //==========================================================
+    // Type Definitions
+    // I made myself start with TS and it's too late to quit now
+    //==========================================================    
+    interface MealPlan {
+        days: Array<{
+            day: string;
+            breakfast: Meal;
+            lunch: Meal;
+            dinner: Meal;
+        }>;
+    }
+
+    interface Meal {
+        recipe: string;
+        ingredients: string[];
+        instructions: string;
+    }
+
+    interface MealPlanGeneratedEvent extends CustomEvent {
+        detail: MealPlan;
+    }
+
+    //==========================================================
+    // Utility Functions
+    //==========================================================
+    // Modularized the HTML generation for rapid prototyping
+    // Seperating out ingredients list allows us to further
+    // parse into local grocer data (Walmart API, etc.)
+    //==========================================================
+
+    const createIngredientList = (ingredients) => {
+        return ingredients
+            .map((ingredient) => `<li class="mb-1">${ingredient}</li>`)
+            .join("");
+    };
+
+    const createMealSection = (mealName, mealData) => {
+        return `
+                <div class="mb-6 bg-white rounded-lg shadow-md p-6 border-l-4 border-amber-500">
+                    <h3 class="text-xl font-semibold mb-3 text-amber-700">${mealName}: ${mealData.recipe}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-medium text-lg mb-2 text-amber-600">Ingredients:</h4>
+                            <ul class="list-disc list-inside text-gray-700">
+                                ${createIngredientList(mealData.ingredients)}
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-lg mb-2 text-amber-600">Instructions:</h4>
+                            <p class="text-gray-700">${mealData.instructions}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+    };
+
+    const createDaySection = (day) => {
+        return `
+                <div class="mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-amber-800 border-b-2 border-amber-300 pb-2">${day.day}</h2>
+                    ${createMealSection("Breakfast", day.breakfast)}
+                    ${createMealSection("Lunch", day.lunch)}
+                    ${createMealSection("Dinner", day.dinner)}
+                </div>
+            `;
+    };
+
+    const showLoading = () => {
+        const spinner = document.getElementById("loading-spinner");
+        if (spinner) spinner.classList.remove("hidden");
+    };
+
+    const hideLoading = () => {
+        const spinner = document.getElementById("loading-spinner");
+        if (spinner) spinner.classList.add("hidden");
+    };
+
+    //==========================================================
+    // Event listeners
+    //==========================================================
+
+    document.getElementById("myForm")?.addEventListener("submit", showLoading);
+
+    document.addEventListener("mealPlanGenerated", ((event: MealPlanGeneratedEvent) => {
+        hideLoading();
+        const mealPlan = event.detail;
+        const container = document.getElementById("meal-plan-container");
+
+        if (!container) return;
+
+        container.innerHTML = "";
+        container.className =
+            "mt-8 max-w-4xl mx-auto p-6 bg-amber-50 rounded-xl shadow-lg";
+
+        const mealPlanHTML = mealPlan.days.map(createDaySection).join("");
+        container.innerHTML = `
+                <h1 class="text-3xl font-bold mb-6 text-center text-amber-900">Your Chef's Kiss Meal Plan</h1>
+                ${mealPlanHTML}
+            `;
+    }) as EventListener);
+</script>

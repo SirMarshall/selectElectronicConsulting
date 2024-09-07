@@ -1,0 +1,63 @@
+---
+//Form component!
+//This is dirty, but it works for now. Running asynchronous updates
+//had to be wrapped in a client side function to avoid SSR issues.
+//Loading a client:only component let's us seperate logic and 
+//advantagize loading benefits where needed.
+---
+
+<form method="post" class="flex flex-col" id="myForm">
+  <label for="name">Name*:</label>
+  <input
+    class="border-amber-900 border-2"
+    type="text"
+    id="name"
+    name="name"
+    required
+  />
+
+  <label for="people">Number of people in your household*:</label>
+  <input
+    class="border-amber-900 border-2"
+    type="number"
+    id="people"
+    name="people"
+    required
+  />
+
+  <label for="days">How many days to plan for*:</label>
+  <input
+    class="border-amber-900 border-2"
+    type="number"
+    id="days"
+    name="days"
+    required
+  />
+
+  <label for="allergies">Allergies:</label>
+  <input
+    class="border-amber-900 border-2"
+    type="text"
+    id="allergies"
+    name="allergies"
+  />
+
+  <label for="cuisine">Favorite cuisine(s):</label>
+  <input
+    class="border-amber-900 border-2"
+    type="text"
+    id="cuisine"
+    name="cuisine"
+  />
+
+  <br />
+  <button type="submit" id="submit" class="p-3 text-white bg-amber-900"
+    >Submit</button
+  >
+</form>
+
+<script>
+  import { handleSubmit } from "./mealPlanUtils";
+
+  document.getElementById("myForm").addEventListener("submit", handleSubmit);
+</script>
