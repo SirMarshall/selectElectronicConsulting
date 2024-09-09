@@ -6,6 +6,8 @@
 //==============================================================================
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { responseSchema } from "./responseSchema.js";
+const geminiPro="gemini-1.5-pro-exp-0827";
+const geminiFlash="gemini-1.5-flash-exp-0827";
 //==============================================================================
 // Tasty API Keys exposed to the client B)
 // Gemini keys are free, loser, stop sniffing!
@@ -13,7 +15,7 @@ import { responseSchema } from "./responseSchema.js";
 const apiKey = import.meta.env.PUBLIC_GOOGLE_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-pro-exp-0827",
+    model: geminiFlash,
     generationConfig: {
         responseMimeType: "application/json",
         responseSchema: responseSchema

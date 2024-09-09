@@ -23,9 +23,12 @@ export const responseSchema = {
                                 "items": {
                                     "type": "string"
                                 }
+                            },
+                            "preparationTime": {
+                                "type": "string"
                             }
                         },
-                        "required": ["recipe", "instructions", "ingredients"]
+                        "required": ["recipe", "instructions", "ingredients", "preparationTime"]
                     },
                     "lunch": {
                         "type": "object",
@@ -41,9 +44,12 @@ export const responseSchema = {
                                 "items": {
                                     "type": "string"
                                 }
+                            },
+                            "preparationTime": {
+                                "type": "string"
                             }
                         },
-                        "required": ["recipe", "instructions", "ingredients"]
+                        "required": ["recipe", "instructions", "ingredients", "preparationTime"]
                     },
                     "dinner": {
                         "type": "object",
@@ -59,9 +65,12 @@ export const responseSchema = {
                                 "items": {
                                     "type": "string"
                                 }
+                            },
+                            "preparationTime": {
+                                "type": "string"
                             }
                         },
-                        "required": ["recipe", "instructions", "ingredients"]
+                        "required": ["recipe", "instructions", "ingredients", "preparationTime"]
                     },
                 },
                 "required": ["day", "breakfast", "lunch", "dinner"]
