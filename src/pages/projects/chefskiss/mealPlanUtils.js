@@ -6,8 +6,8 @@
 //==============================================================================
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { responseSchema } from "./responseSchema.js";
-const geminiPro="gemini-1.5-pro-exp-0827";
-const geminiFlash="gemini-1.5-flash-exp-0827";
+const geminiPro = "gemini-1.5-pro-002";
+const geminiFlash = "gemini-1.5-flash-002";
 //==============================================================================
 // Tasty API Keys exposed to the client B)
 // Gemini keys are free, loser, stop sniffing!
