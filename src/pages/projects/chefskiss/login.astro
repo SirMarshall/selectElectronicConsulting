@@ -1,6 +1,5 @@
 ---
 import Title from "../../../layouts/Title.astro";
-import Header from "../../../components/Header.astro";
 
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
@@ -12,9 +11,18 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 <Title title="Login">
   <div class="min-h-screen w-screen bg-amber-900 p-5">
-    <Header />
+    <div
+      id="header"
+      class="z-50 mx-auto bg-amber-50 rounded-md p-2 text-center text-amber-900 mb-6 flex flex-col items-center relative"
+    >
+      <h1 class="text-3xl font-bold">Chef Kiss</h1>
+      <h2 class="text-xl">To begin, let's learn about you!</h2>
+      <a href="./">
+        <i class="fa-regular fa-circle-left text-4xl absolute top-0 right-5 m-5"
+        ></i>
+      </a>
+    </div>
     <div class="mx-auto bg-amber-50 rounded-md p-5 text-center text-amber-900">
-      <h1 class="text-5xl font-bold mb-4">Welcome Back!</h1>
       <h2 class="text-xl mb-6">Please enter your login details.</h2>
 
       <form class="flex flex-col m-3 p-4 rounded" id="signup-form">
@@ -23,7 +31,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
           type="email"
           id="email"
           name="email"
-          class="bg-amber-200 m-2 p-2 rounded text-amber-900"
+          class="bg-amber-200 m-2 p-2 rounded text-amber-900 border-amber-900 border-2"
           required
         />
         <label for="password" class="text-amber-900">Password:</label>
@@ -31,7 +39,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
           type="password"
           id="password"
           name="password"
-          class="bg-amber-200 m-2 p-2 rounded text-amber-900"
+          class="bg-amber-200 m-2 p-2 rounded text-amber-900 border-amber-900 border-2"
           required
           minlength="6"
         />
@@ -42,14 +50,12 @@ if (!supabaseUrl || !supabaseAnonKey) {
           Login
         </button>
       </form>
-      <form action="">
-        <button
-          type="submit"
-          class="bg-amber-700 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded mt-4"
-        >
-          Sign-Up
-        </button>
-      </form>
+      <button
+        type="submit"
+        class="bg-amber-700 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded mt-4"
+      >
+        Sign-Up
+      </button>
 
       <p id="signup-result" class="text-amber-900 mt-4"></p>
     </div>
