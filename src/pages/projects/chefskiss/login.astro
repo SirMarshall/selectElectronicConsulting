@@ -1,0 +1,79 @@
+---
+import Title from "../../../layouts/Title.astro";
+import Header from "../../../components/Header.astro";
+
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error("Missing Supabase environment variables.");
+}
+---
+
+<Title title="Login">
+  <div class="min-h-screen w-screen bg-amber-900 p-5">
+    <Header />
+    <div class="mx-auto bg-amber-50 rounded-md p-5 text-center text-amber-900">
+      <h1 class="text-5xl font-bold mb-4">Welcome Back!</h1>
+      <h2 class="text-xl mb-6">Please enter your login details.</h2>
+
+      <form class="flex flex-col m-3 p-4 rounded" id="signup-form">
+        <label for="email" class="text-amber-900">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="bg-amber-200 m-2 p-2 rounded text-amber-900"
+          required
+        />
+        <label for="password" class="text-amber-900">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="bg-amber-200 m-2 p-2 rounded text-amber-900"
+          required
+          minlength="6"
+        />
+        <button
+          type="submit"
+          class="bg-amber-700 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded mt-4"
+        >
+          Login
+        </button>
+      </form>
+      <form action="">
+        <button
+          type="submit"
+          class="bg-amber-700 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded mt-4"
+        >
+          Sign-Up
+        </button>
+      </form>
+
+      <p id="signup-result" class="text-amber-900 mt-4"></p>
+    </div>
+  </div>
+</Title>
+
+<script>
+  import { signUp } from "../../../scripts/supabase.js";
+
+  const form = document.getElementById("signup-form");
+  const resultElement = document.getElementById("signup-result");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const email = (form.querySelector("#email") as HTMLInputElement).value;
+    const password = (form.querySelector("#password") as HTMLInputElement)
+      .value;
+
+    const { error, data } = await signUp(email, password);
+
+    if (error) {
+      //Display error in resultElement
+      resultElement.textContent = error.message;
+    }
+  });
+</script>
