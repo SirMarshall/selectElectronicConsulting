@@ -1,0 +1,31 @@
+---
+import Title from "../../Home/Title.astro";
+const { title, subtitle, link } = Astro.props;
+
+let newLink;
+if (link === "account") {
+  newLink = "/projects/chefskiss/account";
+} else {
+  newLink = "/projects/chefskiss/";
+}
+---
+
+<Title title="Chef's Kiss">
+  <div class="min-h-screen w-screen bg-amber-900 p-5">
+    <div
+      id="header"
+      class="z-50 mx-auto bg-amber-50 rounded-md p-2 text-center text-amber-900 mb-6 flex flex-col items-center relative"
+    >
+      <h1 class="text-3xl font-bold">{title}</h1>
+      <h2 class="text-xl">{subtitle}</h2>
+      <a href={newLink} class="absolute top-0 right-0"
+        ><i
+          class={`fa-regular ${newLink === "/projects/chefskiss/account" ? "fa-user" : "fa-circle-left"} text-4xl mr-5 mt-5 md:mr-5 md:mt-5 lg:mr-5 lg:mt-5`}
+        ></i>
+      </a>
+    </div>
+    <div class="mx-auto bg-amber-50 rounded-md p-5 text-center text-amber-900">
+      <slot />
+    </div>
+  </div>
+</Title>

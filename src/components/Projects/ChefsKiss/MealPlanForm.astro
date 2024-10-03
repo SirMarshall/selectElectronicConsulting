@@ -2,7 +2,7 @@
 //Form component!
 //This is dirty, but it works for now. Running asynchronous updates
 //had to be wrapped in a client side function to avoid SSR issues.
-//Loading a client:only component let's us seperate logic and 
+//Loading a client:only component let's us seperate logic and
 //advantagize loading benefits where needed.
 ---
 
@@ -57,7 +57,7 @@
 </form>
 
 <script>
-  import { handleSubmit } from "./mealPlanUtils";
+  import { handleSubmit } from "../../../scripts/Projects/ChefsKiss/mealPlanUtils.js";
 
   document.getElementById("myForm").addEventListener("submit", handleSubmit);
 </script>
