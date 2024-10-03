@@ -29,6 +29,7 @@ export async function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
+
     const mealPlanParams = {
         name: formData.get('name'),
         people: formData.get('people'),
